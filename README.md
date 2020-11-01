@@ -7,9 +7,14 @@ This repo contains several models, using both spectral domain and waveform domai
 These models work on various datasets, but I have found that a dataset consisting of contemporary A Cappella music best suits the models, as modern techniques in A Cappella recording and production place a much heavier emphasis on width and surround sound than other genres of music (and their associated engineering standards) that can use real instruments for breadth of timbre. To that end, I have trained these models on the following dataset:
 
 Lithium (Faux Paz- University of Maryland)
+
 Panorama (Reverb- Florida State University)
+
 In Full Color (YellowJackets- University of Rochester)
+
 Come Together (M-Pact)
+
 PTX Vol. 2 (Pentatonix)
+
 
 Each sampled at 16khz, and fed into the models in ~4 second chunks.
