@@ -17,4 +17,6 @@ Come Together (M-Pact)
 PTX Vol. 2 (Pentatonix)
 
 
-Each sampled at 16khz, and fed into the models in ~4 second chunks.
+Each sampled at 16khz, and fed into the models in ~4 second chunks. This process is completed by db_splitter.py
+
+Each model has a train_<net type>_<domain>.py and a network_<net type>_<domain>.py file. In all cases, train_<...>.py is dependent on network_<...>.py.
