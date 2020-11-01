@@ -1,6 +1,3 @@
-#TODO: Make the dataset bigger!, find the output dims of the network
-#TODO: Replace loss with perceptual loss
-
 from network import UNet
 import torch
 import torchaudio
@@ -14,22 +11,16 @@ window_tensor = torch.hann_window(n_fft).cuda()
 def mean(list):
     return sum(list)/len(list)
 
-#TODO: Make this function work
 def perceptual_loss(output,target):
-    #print("start loss:")
-    #build the spectrograms here (this isn't going to work right, i need to find the right parameters) WAS ONESIDED = TRUE
     complex_mix_output = torch.stft(output, n_fft = n_fft, hop_length = 128, window = window_tensor)
     complex_mix_pow_output = complex_mix_output.pow(2).sum(-1)
     complex_mix_mag_output = torch.sqrt(complex_mix_pow_output)
-    #print("output max: {}, output min: {}".format(torch.max(complex_mix_mag_output),torch.min(complex_mix_mag_output)))
 
     complex_mix_target = torch.stft(target, n_fft = n_fft, hop_length = 128, window = window_tensor)
     complex_mix_pow_target = complex_mix_target.pow(2).sum(-1)
     complex_mix_mag_target = torch.sqrt(complex_mix_pow_target)
-    #print("target max: {}, target min: {}".format(torch.max(complex_mix_mag_target),torch.min(complex_mix_mag_target)))
 
     comparison = nn.MSELoss()
-    #print(comparison(complex_mix_mag_output,complex_mix_mag_target))
     return comparison(complex_mix_mag_output,complex_mix_mag_target)
 
 #build dataset
