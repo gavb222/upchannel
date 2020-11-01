@@ -1,5 +1,3 @@
-#TODO: Make the dataset bigger!, find the output dims of the network
-
 from network_unet_spectral import UNet
 import torch
 import torchaudio
