@@ -1,5 +1,5 @@
 
-from network import UNet, Discriminator
+from network_gan_waveform import UNet, Discriminator
 import torch
 import torchaudio
 import torch.nn as nn
