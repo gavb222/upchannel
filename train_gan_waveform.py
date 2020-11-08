@@ -131,18 +131,18 @@ while keep_training:
     print("Epoch {} finished! G Loss: {}, D Loss: {}, Total Time: {}s".format(counter,mean(G_losses),mean(D_losses),time.time()-start_time))
     #test to see if we should run another epoch
 
-    if counter%5 == 1:
-        with torch.no_grad():
-            for j in range(0,dataset.size()[0],100):
-                #file,channel,waveform
-                input_stereo = dataset[j,:,:].cuda()
-                #stack mono version on top of stereo waveform (0 and 1 are stereo, 2 is mono)
-                input_wav = torch.mean(input_stereo, dim=0).unsqueeze(0)
+    #if counter%5 == 1:
+    with torch.no_grad():
+        for j in range(0,dataset.size()[0],100):
+            #file,channel,waveform
+            input_stereo = dataset[j,:,:].cuda()
+            #stack mono version on top of stereo waveform (0 and 1 are stereo, 2 is mono)
+            input_wav = torch.mean(input_stereo, dim=0).unsqueeze(0)
 
-                #run the data through the network
-                output_wav = G(input_wav.unsqueeze(0)).cpu()
+            #run the data through the network
+            output_wav = G(input_wav.unsqueeze(0)).cpu()
 
-                torchaudio.save(results_path + os.sep + "intermediate_output_" + str(counter) + "_" + str(j) + ".wav", output_wav.squeeze(),fs)
+            torchaudio.save(results_path + os.sep + "intermediate_output_" + str(counter) + "_" + str(j) + ".wav", output_wav.squeeze(),fs)
     if counter > 25:
         #if mean(training_losses[-4:]) < mean(epoch_losses):
         keep_training = False
