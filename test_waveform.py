@@ -1,3 +1,7 @@
+#Load the waveform domain based model (either unet or GAN), and load validation data into it
+#run the validation data through the network, and then write it out
+#this data can be compared to the original data in a program like audacity.
+
 from network import UNet
 import torch
 import torchaudio
