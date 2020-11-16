@@ -4,19 +4,10 @@ This project trains deep learning models to read in mono audio files and output 
 
 This repo contains several models, using both spectral domain and waveform domain based systems. In particular, there are pure u-net based models (heavily based on the models implemented by Milesial and jaxony), as well as GANs that utilize the aforementioned u-nets as generators.
 
-These models work on various datasets, but I have found that a dataset consisting of contemporary A Cappella music best suits the models, as modern techniques in A Cappella recording and production place a much heavier emphasis on width and surround sound than other genres of music (and their associated engineering standards) that can use real instruments for breadth of timbre. To that end, I have trained these models on the following dataset:
-
-Lithium (Faux Paz- University of Maryland)
-
-Panorama (Reverb- Florida State University)
-
-In Full Color (YellowJackets- University of Rochester)
-
-Come Together (M-Pact)
-
-PTX Vol. 2 (Pentatonix)
-
+I have trained this model on several datasets ranging from pop music, to contemporary a cappella music, to string quartets. I have found that since string quartets feature not only different timbres of instruments, but also a common standard for mixing and recording setup that facilitates spatial differentiation, they are the best domain of music to train the model on. To that end, I have trained the model on several albums by the St. Lawrence String Quartet, specifically their rendition of Haydn string quartet op. 20, coming in at a full runtime of 2:33:00. I plan on extending this dataset to more audio soon. For validation data, I used the Borodin string quartet playing Alexander Borodin's string quartet in D major, coming in at 8:37.
 
 Each sampled at 16khz, and fed into the models in ~4 second chunks. This process is completed by db_splitter.py
 
 Each model has a train_(net type)_(domain).py and a network_(net type)_(domain).py file. In all cases, train_(...).py is dependent on network_(...).py.
+
+I have determined that while the spectral domain models work, they are severely limited by their need to convert magnitude spectrograms back to the waveform domain, which is an intensely noise-producing process. Thus, I have narrowed my focus to the waveform domain based models, which is why there is a test_waveform.py but not a test_spectral.py in this repo.
